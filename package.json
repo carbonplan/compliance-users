@@ -21,7 +21,7 @@
   "homepage": "https://github.com/carbonplan/compliance-users#readme",
   "dependencies": {
     "@babel/core": "^7.16.7",
-    "@carbonplan/components": "^11.1.0",
+    "@carbonplan/components": "^11.1.4",
     "@carbonplan/icons": "^1.1.0",
     "@carbonplan/theme": "^7.0.0",
     "@mdx-js/loader": "^1.6.22",
