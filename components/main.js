@@ -17,9 +17,9 @@ const Main = () => {
   const order = useMemo(
     () =>
       Object.keys(reportingPeriods).sort(
-        (a, b) => Number(a.split('-')[0]) - Number(b.split('-')[0])
+        (a, b) => Number(a.split('-')[0]) - Number(b.split('-')[0]),
       ),
-    [reportingPeriods]
+    [reportingPeriods],
   )
   return (
     <>

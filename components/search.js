@@ -8,7 +8,7 @@ import useStore from './use-store'
 
 const getMatches = (search, targets) => {
   let matches = targets.filter((d) =>
-    d.toLowerCase().includes(search.toLowerCase())
+    d.toLowerCase().includes(search.toLowerCase()),
   )
   return matches
 }
@@ -111,7 +111,7 @@ const Search = () => {
       }
     },
     {},
-    [preview, highlighted]
+    [preview, highlighted],
   )
 
   useKey(
@@ -126,7 +126,7 @@ const Search = () => {
       })
     },
     {},
-    [preview]
+    [preview],
   )
 
   useKey(
@@ -142,7 +142,7 @@ const Search = () => {
       })
     },
     {},
-    [preview]
+    [preview],
   )
 
   const input = useRef(null)
@@ -162,7 +162,7 @@ const Search = () => {
         match,
         data.opr_to_arbs,
         data.arb_to_oprs,
-        data.project_name_to_opr
+        data.project_name_to_opr,
       )
     }
     if (searchBy.user) {

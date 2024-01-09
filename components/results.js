@@ -27,27 +27,27 @@ const Results = () => {
     }
 
     const reportingPeriodsActive = Object.keys(reportingPeriods).filter(
-      (d) => reportingPeriods[d]
+      (d) => reportingPeriods[d],
     )
 
     if (data.opr_to_arbs[searchId]) {
       setFiltered(
         addType(
           data.arb_to_users[data.opr_to_arbs[searchId]].filter((d) =>
-            reportingPeriodsActive.includes(d.reporting_period)
+            reportingPeriodsActive.includes(d.reporting_period),
           ),
-          'user'
-        )
+          'user',
+        ),
       )
     } else if (data.user_to_arbs[searchId]) {
       if (showResultsBy.project) {
         setFiltered(
           addType(
             data.user_to_arbs[searchId].filter((d) =>
-              reportingPeriodsActive.includes(d.reporting_period)
+              reportingPeriodsActive.includes(d.reporting_period),
             ),
-            'project'
-          )
+            'project',
+          ),
         )
       } else if (showResultsBy.facility) {
         let facilities = []
@@ -62,8 +62,8 @@ const Results = () => {
                     reporting_period: d,
                     facility_id: id,
                   },
-                  data.facility_id_to_info[id][d]
-                )
+                  data.facility_id_to_info[id][d],
+                ),
               )
             })
           }
@@ -81,8 +81,8 @@ const Results = () => {
                 {
                   user_id: id,
                   reporting_period: d,
-                }
-              )
+                },
+              ),
             )
           })
         }

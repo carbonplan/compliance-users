@@ -48,10 +48,10 @@ const useStore = create((set) => ({
           .concat(Object.keys(data.project_name_to_opr))
           .filter((d) => !data.combined_arbs.includes(d))
         data.user_targets = Object.keys(data.user_to_arbs).concat(
-          Object.keys(data.user_name_to_id)
+          Object.keys(data.user_name_to_id),
         )
         data.facility_targets = Object.keys(data.facility_to_user).concat(
-          Object.keys(data.facility_name_to_id)
+          Object.keys(data.facility_name_to_id),
         )
         set({ data: data })
       })
