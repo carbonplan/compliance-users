@@ -11,7 +11,7 @@ pd.options.mode.chained_assignment = None
 
 # Define years over which compliance data will be considered and where to find it
 # FOR UPDATES: add reporting and mrr data years
-reporting_periods = ["2013-2014", "2015-2017", "2018-2020", "2021", "2022"]
+reporting_periods = ["2013-2014", "2015-2017", "2018-2020", "2021-2023"]
 mrr_data_years = [
     "2013",
     "2014",
@@ -23,10 +23,11 @@ mrr_data_years = [
     "2020",
     "2021",
     "2022",
+    "2023",
 ]
 
 # FOR UPDATES: change to latest issuance table file name
-issuance_table_path = "../data/nc-arboc_issuance.xlsx"
+issuance_table_path = "../data/nc-arboc_issuance_2024-12-10.xlsx"
 compliance_report_path = "../data/compliance-reports/"
 mrr_data_path = "../data/mrr-data/"
 
@@ -139,7 +140,7 @@ def main():
     }
 
     # FOR UPDATES: change json destination
-    write_json(collection, "../data/outputs/user_data_v3.0.json")
+    write_json(collection, "../data/outputs/user_data_v4.0.json")
 
 
 if __name__ == "__main__":

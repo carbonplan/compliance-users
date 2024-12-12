@@ -2,29 +2,56 @@ import pandas as pd
 
 
 def read_user_project_data(data_path, reporting_periods):
+    
+    # FOR UPDATES: check naming of compliance report file and tab 
+    file_config_by_year = {
+        "2022": {
+            "file": "nc-2022compliancereport.xlsx",
+            "sheet": "2022 Offset Detail",
+        },
+        "2021-2023": {
+            "file": "nc-CP4compliancereport.xlsx",
+            "sheet": "CP4 Offset Detail",
+        },
+    }
+    
+    default_file_template = "{reporting_period}compliancereport.xlsx"
+    default_sheet_template = "{reporting_period} Offset Detail"
+    
     user_project_df = pd.DataFrame()
+    
     for reporting_period in reporting_periods:
-        if reporting_period == "2022":
-            df = pd.read_excel(
-                data_path + "nc-" + reporting_period + "compliancereport.xlsx",
-                sheet_name=reporting_period + " " + "Offset Detail",
-                skiprows=4,
-                usecols="A:E",
-            )
+        config = file_config_by_year.get(reporting_period, None)
+        
+        if config:
+            file_path = data_path + config["file"]
+            sheet_name = config["sheet"]
         else:
-            df = pd.read_excel(
-                data_path + reporting_period + "compliancereport.xlsx",
-                sheet_name=reporting_period + " " + "Offset Detail",
-                skiprows=4,
-                usecols="A:E",
-            )
+            file_path = data_path + default_file_template.format(reporting_period=reporting_period)
+            sheet_name = default_sheet_template.format(reporting_period=reporting_period)
+
+        # read the Excel file
+        df = pd.read_excel(
+            file_path, 
+            sheet_name=sheet_name, 
+            skiprows=4, 
+            usecols="A:E"
+        )
+        
+        # filter out rows with missing values
         df = df[~pd.isnull(df).any(axis=1)]
+        
+        # add reporting period column
         df["reporting_period"] = reporting_period
-        user_project_df = user_project_df.append(df)
+        
+        # append to the user_project dataframe
+        user_project_df = pd.concat([user_project_df, df], ignore_index=True)
+        
+    # select and rename relevant columns
     rename_d = {
         "Entity ID": "user_id",
         "Quantity": "quantity",
-        "ARB Project ID #": "arb_id",
+        "ARB Project ID #": "arb_id", ## come back to me!
     }
     user_project_df.rename(
         columns=rename_d,
@@ -38,7 +65,10 @@ def read_user_project_data(data_path, reporting_periods):
     # rows that had the same entity and project but different vintages
     user_project_df["arb_id"] = user_project_df["arb_id"].str.replace(
         "CAFR-", "CAFR"
-    )  # typo in 2022 data for CAFR-6339
+    )  # fixing typo in 2022 data for CAFR6339
+    user_project_df["arb_id"] = user_project_df["arb_id"].str.replace(
+        "CAOD-", "CAOD"
+    )  # fixing typo in 2024 data for CAOD6458
     user_project_df["arb_id"] = user_project_df["arb_id"].str.split("-").apply(lambda x: x[0])
 
     user_project_df = (

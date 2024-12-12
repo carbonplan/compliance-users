@@ -4,20 +4,39 @@ import pandas as pd
 
 
 def read_user_facility_data(data_path, reporting_periods):
+    
+    # FOR UPDATES: check naming of compliance report file and tab 
+    file_config_by_year = {
+        "2022": {
+            "file": "nc-2022compliancereport.xlsx",
+            "sheet": "2022 Compliance Summary",
+        },
+        "2021-2023": {
+            "file": "nc-CP4compliancereport.xlsx",
+            "sheet": "CP4 Compliance Summary",
+        },
+    }
+
+    default_file_template = "{reporting_period}compliancereport.xlsx"
+    default_sheet_template = "{reporting_period} Compliance Summary"
+    
     entity_facility_df = pd.DataFrame()
+    
     for reporting_period in reporting_periods:
-        if reporting_period == "2022":
-            df = pd.read_excel(
-                data_path + "nc-" + reporting_period + "compliancereport.xlsx",
-                sheet_name=reporting_period + " " + "Compliance Summary",
-                skiprows=4,
-            )
+        config = file_config_by_year.get(reporting_period, None)
+        if config:
+            file_path = data_path + config["file"]
+            sheet_name = config["sheet"]
         else:
-            df = pd.read_excel(
-                data_path + reporting_period + "compliancereport.xlsx",
-                sheet_name=reporting_period + " " + "Compliance Summary",
-                skiprows=4,
-            )
+            file_path = data_path + default_file_template.format(reporting_period=reporting_period)
+            sheet_name = default_sheet_template.format(reporting_period=reporting_period)
+            
+        # read the Excel file
+        df = pd.read_excel(
+            file_path, 
+            sheet_name=sheet_name, 
+            skiprows=4
+        )    
 
         # clean up dataframe
         rename_d = {
@@ -41,7 +60,7 @@ def read_user_facility_data(data_path, reporting_periods):
         df = df.explode("facility_ids")
         df = df.rename(columns={"facility_ids": "facility_id"})
 
-        entity_facility_df = entity_facility_df.append(df)
+        entity_facility_df = pd.concat([entity_facility_df, df], ignore_index=True)
 
     entity_facility_df["user_id"] = entity_facility_df["user_id"].str.strip()
     entity_facility_df["user_name"] = entity_facility_df["user_name"].str.strip()
