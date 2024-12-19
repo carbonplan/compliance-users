@@ -32,9 +32,9 @@ This repository is being used to develop a simple tool to query California Cap &
 
 ### data sources
 
-- [Compliance Reports](https://ww2.arb.ca.gov/our-work/programs/cap-and-trade-program/cap-and-trade-program-data): Specifically, we are using the reports published at the end of each full compliance period (2013-2014, 2015-2017, 2018-2020) detailing how regulated entities complied with their Cap & Trade Obligations, including their use of offset credits. We also use annual compliance reports (2021 and 2022) where no report for the full compliance period is available.
+- [Compliance Reports](https://ww2.arb.ca.gov/our-work/programs/cap-and-trade-program/cap-and-trade-program-data): Specifically, we are using the reports published at the end of each full compliance period (2013-2014, 2015-2017, 2018-2020, 2021-2023) detailing how regulated entities complied with their Cap & Trade Obligations, including their use of offset credits. We will also incorporate annual compliance reports (2021 and 2022) when no report for the full compliance period is available.
 
-- [Offset Credit Issuance Table](https://ww2.arb.ca.gov/our-work/programs/cap-and-trade-program/cap-and-trade-program-data): This table spreadsheet provides information about the issuance of ARB offset credits, i.e. offset credits that are eligible for use in the Cap & Trade program. This table is typically updated multiple times a month; we are using the issuance table published on Dec 27, 2023.
+- [Offset Credit Issuance Table](https://ww2.arb.ca.gov/our-work/programs/cap-and-trade-program/cap-and-trade-program-data): This table spreadsheet provides information about the issuance of ARB offset credits, i.e. offset credits that are eligible for use in the Cap & Trade program. This table is typically updated multiple times a month; we are using the issuance table published on Nov 27, 2024.
 
 - [Mandatory GHG Reporting Data (MRR)](https://ww2.arb.ca.gov/mrr-data): Annual MRR data provides details on the emissions from facilities who are covered by the Cap & Trade program.
 
@@ -85,6 +85,10 @@ Update to reflect compliance data released in December 2022.
 ### 3.0.0 (Jan 8, 2024)
 
 Update to reflect compliance data released in December 2023.
+
+### 4.0.0 (Dec 12, 2024)
+
+Update to reflect compliance data released in December 2024.
 
 ## license
 

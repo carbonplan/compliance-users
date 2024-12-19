@@ -22,7 +22,7 @@ def read_project_data(data_path):
             "State",
             "Project Documentation",
         ]
-    ]
+    ].copy()
     issuance_df.rename(
         columns={
             "CARB Issuance ID": "arb_id",
@@ -34,7 +34,7 @@ def read_project_data(data_path):
         },
         inplace=True,
     )
-    # standardizing ids, table cleanup
+    # standardize ids and clean up the table
     issuance_df["arb_id"] = issuance_df["arb_id"].str.strip()
     issuance_df["opr_id"] = issuance_df["opr_id"].astype(str).str.strip()
 

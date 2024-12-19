@@ -33,7 +33,7 @@ const description = (
     <Link href='https://github.com/carbonplan/compliance-users'>
       GitHub repository
     </Link>
-    . This tool was updated as of January 2024.
+    . This tool was updated as of December 2024.
   </span>
 )
 

@@ -2,33 +2,41 @@
 
 - Get new data
 
-  - Download new data files (issuance table, compliance report, emissions data)
-  - Rename previous issuance table to match the tool version is was associated with
+  - https://ww2.arb.ca.gov/our-work/programs/cap-and-trade-program/cap-and-trade-program-data
+  - Download new issuance table; if file name matches previous years', append download date (e.g.`nc-arboc_issuance_2024-12-10.xlsx`
+  - Dowload new compliance report
+  
+  - https://ww2.arb.ca.gov/mrr-data
+  - Download new emissions data; historically, name has matched `YYYY-ghg-emissions-YYYY-MM-DD.xlsx`
+
 
 - In 'build_users_data.py':
 
-  - Add new data years
+  - Add new data years (if adding a reporting period rather than annaul compliance report, delete the annual reporting periods)
   - Change issuance table path to latest issuance table name
   - Change json output file name to the next file version
 
 - In 'facilities.py':
-  - Update file name dictionaries
+  - Update file name dictionaries (if adding a reporting period rather than annual compliance report, change the years which previously pointed at an annual reporting period to a full reporting period)
+  - Update skiprows for the new reporting period if different than default
+  - Check to make the columns names in the new MRR sheet match the function (historically they have)
 
-If CARB doesn't change the format of their spreadsheets, you should just be able to run 'build_users_data.py' from here! However, they often make changes like adding or delete rows in the spreadsheet, which require special handling where we read in the excel files.
+- In 'users_and_projects.py':
+  - Add the file and Offsets Detail sheet name for the new compliance report to the dictionary if different than default pattern
+  - Check that skiprows assumption still holds
 
-- Handle "special cases" in excel sheet formating in wherever we use the function 'pd.read_excel' to capture year-by-year variations
+- In 'users_and_facilities.py':
+  - Add the file and Compliance Summary sheet name for the new compliance report to the dictionary if different than default pattern
+  - Check that skiprows assumption still holds
+  
 
-Once all the data is successfully read in, it's time to do a series of spot checks on the data. (I usually do this in a jupyter notebook.)
+Use the `sandbox.ipynb` to test these updates and make sure all the new data is successfully read in.
 
-- Check that the data at head and tail of each new data file is part of the new database. This is easiest to do by examining the intermediary dataframes (user_project_df, project_df, user_facility_df, facility_df) created in the main function of 'build_users_data.py'.
+If all checks pass, run `build_users_data` from the `scripts` folder. You should see the new version of the data in the `data/outputs` folder. Do some spot check on the new output json. 
 
-- Choose a handful of compliance users and manually check the related data in the new raw data files + the live compliance tool.
+If successful, update documentation:
 
-- Choose a handful of offst projects and manually check that we've correctly capture who has used their offsets using the new raw data files + the live compliance tool.
-
-Update documentation:
-
-- Indicate new version in 'README.md'
+- Indicate new data version in 'README.md'
 
 - Update the "last updated" date and list of years included in 'methods.md', 'layout.js', and '.zenodo.json'.
 
@@ -38,4 +46,4 @@ Update and test front-end:
 
 - Add new year to the filters.
 
-- Change pointer in 'components/use-store.js' to access the new data.
+- Change pointer in 'components/use-store.js' to access the new data. (You'll have to temporarily point to the update branch version of the data to get a vercel preview of the new data before publication.)
