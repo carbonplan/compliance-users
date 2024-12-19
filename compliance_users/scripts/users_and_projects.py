@@ -26,12 +26,8 @@ def read_user_project_data(data_path, reporting_periods):
             file_path = data_path + config["file"]
             sheet_name = config["sheet"]
         else:
-            file_path = data_path + default_file_template.format(
-                reporting_period=reporting_period
-            )
-            sheet_name = default_sheet_template.format(
-                reporting_period=reporting_period
-            )
+            file_path = data_path + default_file_template.format(reporting_period=reporting_period)
+            sheet_name = default_sheet_template.format(reporting_period=reporting_period)
 
         # read the Excel file
         df = pd.read_excel(file_path, sheet_name=sheet_name, skiprows=4, usecols="A:E")
@@ -55,9 +51,7 @@ def read_user_project_data(data_path, reporting_periods):
         columns=rename_d,
         inplace=True,
     )
-    user_project_df = user_project_df[
-        ["user_id", "arb_id", "quantity", "reporting_period"]
-    ]
+    user_project_df = user_project_df[["user_id", "arb_id", "quantity", "reporting_period"]]
     user_project_df["user_id"] = user_project_df["user_id"].str.strip()
     user_project_df["arb_id"] = user_project_df["arb_id"].str.strip()
 
@@ -69,9 +63,7 @@ def read_user_project_data(data_path, reporting_periods):
     user_project_df["arb_id"] = user_project_df["arb_id"].str.replace(
         "CAOD-", "CAOD"
     )  # fixing typo in 2024 data for CAOD6458
-    user_project_df["arb_id"] = (
-        user_project_df["arb_id"].str.split("-").apply(lambda x: x[0])
-    )
+    user_project_df["arb_id"] = user_project_df["arb_id"].str.split("-").apply(lambda x: x[0])
 
     user_project_df = (
         user_project_df.groupby(["user_id", "arb_id", "reporting_period"])["quantity"]
