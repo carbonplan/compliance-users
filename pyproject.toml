@@ -33,9 +33,6 @@ fallback_version = "9999"
 [tool.setuptools.packages.find]
 exclude = ["docs", "tests", "tests.*", "docs.*"]
 
-[tool.setuptools.package-data]
-datatree = ["py.typed"]
-
 
 [tool.mypy]
 files = "compliance_users/**/*.py"
