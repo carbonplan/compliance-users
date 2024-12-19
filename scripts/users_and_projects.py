@@ -2,8 +2,7 @@ import pandas as pd
 
 
 def read_user_project_data(data_path, reporting_periods):
-    
-    # FOR UPDATES: check naming of compliance report file and tab 
+    # FOR UPDATES: check naming of compliance report file and tab
     file_config_by_year = {
         "2022": {
             "file": "nc-2022compliancereport.xlsx",
@@ -14,15 +13,15 @@ def read_user_project_data(data_path, reporting_periods):
             "sheet": "CP4 Offset Detail",
         },
     }
-    
+
     default_file_template = "{reporting_period}compliancereport.xlsx"
     default_sheet_template = "{reporting_period} Offset Detail"
-    
+
     user_project_df = pd.DataFrame()
-    
+
     for reporting_period in reporting_periods:
         config = file_config_by_year.get(reporting_period, None)
-        
+
         if config:
             file_path = data_path + config["file"]
             sheet_name = config["sheet"]
@@ -31,27 +30,22 @@ def read_user_project_data(data_path, reporting_periods):
             sheet_name = default_sheet_template.format(reporting_period=reporting_period)
 
         # read the Excel file
-        df = pd.read_excel(
-            file_path, 
-            sheet_name=sheet_name, 
-            skiprows=4, 
-            usecols="A:E"
-        )
-        
+        df = pd.read_excel(file_path, sheet_name=sheet_name, skiprows=4, usecols="A:E")
+
         # filter out rows with missing values
         df = df[~pd.isnull(df).any(axis=1)]
-        
+
         # add reporting period column
         df["reporting_period"] = reporting_period
-        
+
         # append to the user_project dataframe
         user_project_df = pd.concat([user_project_df, df], ignore_index=True)
-        
+
     # select and rename relevant columns
     rename_d = {
         "Entity ID": "user_id",
         "Quantity": "quantity",
-        "ARB Project ID #": "arb_id", ## come back to me!
+        "ARB Project ID #": "arb_id",  ## come back to me!
     }
     user_project_df.rename(
         columns=rename_d,

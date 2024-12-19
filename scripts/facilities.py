@@ -33,7 +33,6 @@ reporting_periods = {
 
 
 def read_facility_data(data_path, mrr_data_years):
-    
     # FOR UPDATES: check number of rows to skip in GHG data tab
     skiprows_by_year = {"2022": 9, "2023": 7}
     default_skiprows = 8
@@ -46,32 +45,32 @@ def read_facility_data(data_path, mrr_data_years):
         "State": "state",
         "Industry Sector": "sector",
     }
-    
+
     facility_df = pd.DataFrame()
-    
+
     # suppress UserWarnings from excel file reading
     warnings.simplefilter("ignore", UserWarning)
-    
+
     for mrr_data_year in mrr_data_years:
         # determine skiprows
         skiprows = skiprows_by_year.get(mrr_data_year, default_skiprows)
-        
+
         # construct the mrr file path
         file_path = f"{data_path}{mrr_data_year}-ghg-emissions-{mrr_file_year[mrr_data_year]}.xlsx"
-    
+
         # read the Excel file
         df = pd.read_excel(
             file_path,
             sheet_name=f"{mrr_data_year} GHG Data",
             skiprows=skiprows,
         )
-        
+
         # select and rename relevant columns
         df = df[rename_d.keys()].rename(columns=rename_d)
 
         # add reporting period column
         df["reporting_period"] = reporting_periods[mrr_data_year]
-        
+
         # append to the facility dataframe
         facility_df = pd.concat([facility_df, df], ignore_index=True)
 

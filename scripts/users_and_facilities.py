@@ -4,8 +4,7 @@ import pandas as pd
 
 
 def read_user_facility_data(data_path, reporting_periods):
-    
-    # FOR UPDATES: check naming of compliance report file and tab 
+    # FOR UPDATES: check naming of compliance report file and tab
     file_config_by_year = {
         "2022": {
             "file": "nc-2022compliancereport.xlsx",
@@ -19,9 +18,9 @@ def read_user_facility_data(data_path, reporting_periods):
 
     default_file_template = "{reporting_period}compliancereport.xlsx"
     default_sheet_template = "{reporting_period} Compliance Summary"
-    
+
     entity_facility_df = pd.DataFrame()
-    
+
     for reporting_period in reporting_periods:
         config = file_config_by_year.get(reporting_period, None)
         if config:
@@ -30,13 +29,9 @@ def read_user_facility_data(data_path, reporting_periods):
         else:
             file_path = data_path + default_file_template.format(reporting_period=reporting_period)
             sheet_name = default_sheet_template.format(reporting_period=reporting_period)
-            
+
         # read the Excel file
-        df = pd.read_excel(
-            file_path, 
-            sheet_name=sheet_name, 
-            skiprows=4
-        )    
+        df = pd.read_excel(file_path, sheet_name=sheet_name, skiprows=4)
 
         # clean up dataframe
         rename_d = {

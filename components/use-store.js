@@ -16,7 +16,7 @@ const useStore = create((set) => ({
     '2013-2014': true,
     '2015-2017': true,
     '2018-2020': true,
-    '2021-2023': true,  
+    '2021-2023': true,
   },
   data: null,
   filtered: [],
