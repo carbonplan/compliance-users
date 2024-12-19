@@ -1,7 +1,7 @@
+import warnings
 from collections import defaultdict
 
 import pandas as pd
-import warnings
 
 # FOR UPDATES: add new mrr data keys
 mrr_file_year = {
@@ -80,17 +80,23 @@ def read_facility_data(data_path, mrr_data_years):
     facility_df["state"] = facility_df["state"].str.upper().str.strip()
 
     # keep most recent info associated with a fid in each reporting period
-    facility_df = facility_df.drop_duplicates(["facility_id", "reporting_period"], keep="last")
+    facility_df = facility_df.drop_duplicates(
+        ["facility_id", "reporting_period"], keep="last"
+    )
     return facility_df
 
 
 def make_facility_info(facility_df, user_facility_df):
-    facility_name_to_id = facility_df.set_index("facility_name")["facility_id"].to_dict()
+    facility_name_to_id = facility_df.set_index("facility_name")[
+        "facility_id"
+    ].to_dict()
 
     facility_id_to_info = defaultdict(dict)
     for i, row in facility_df.iterrows():
         facility_id_to_info[row["facility_id"]][row["reporting_period"]] = {
-            "facility_name": row["facility_name"] if row["facility_name"] else "missing",
+            "facility_name": row["facility_name"]
+            if row["facility_name"]
+            else "missing",
             "city": "missing" if pd.isna(row["city"]) else row["city"],
             "state": "missing" if pd.isna(row["state"]) else row["state"],
             "sector": "missing" if pd.isna(row["sector"]) else row["sector"],

@@ -51,7 +51,9 @@ def make_opr_to_arbs(issuance_df):
     opr_to_arbs = {}
     combined_arbs = []
     for opr_id in opr_ids:
-        arbs = issuance_df.loc[issuance_df["opr_id"] == opr_id, "arb_id"].unique().tolist()
+        arbs = (
+            issuance_df.loc[issuance_df["opr_id"] == opr_id, "arb_id"].unique().tolist()
+        )
 
         # if an opr id maps to multiple arbs (as is the case with certain early
         # early action projects), concatenate into a combined opr id
@@ -67,7 +69,9 @@ def make_arb_to_oprs(issuance_df, combined_arbs):
     arb_ids = issuance_df["arb_id"].unique().tolist()
     arb_to_oprs = {}
     for arb_id in arb_ids:
-        oprs = issuance_df.loc[issuance_df["arb_id"] == arb_id, "opr_id"].unique().tolist()
+        oprs = (
+            issuance_df.loc[issuance_df["arb_id"] == arb_id, "opr_id"].unique().tolist()
+        )
         # currently, there are two arb ids (CAMM5244 & CALS5030) that map
         # to multiple opr ids; after confirming that the underlying project
         # information is the same, we simply map to the most recent opr id
@@ -86,7 +90,9 @@ def make_project_info(issuance_df):
     opr_rows = issuance_df.drop_duplicates(
         ["opr_id", "project_name", "project_type", "state", "documentation"]
     )
-    opr_rows = opr_rows[["opr_id", "project_name", "project_type", "state", "documentation"]]
+    opr_rows = opr_rows[
+        ["opr_id", "project_name", "project_type", "state", "documentation"]
+    ]
 
     opr_to_project_info = opr_rows.set_index("opr_id").to_dict(orient="index")
     project_name_to_opr = opr_rows.set_index("project_name")["opr_id"].to_dict()

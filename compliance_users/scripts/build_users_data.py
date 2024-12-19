@@ -72,7 +72,10 @@ def prune_data(user_project_df, project_df, user_facility_df, facility_df):
     # drop user/facility data for facilities that don't appear in MRR data
     print()
     print("Facility ids that appear in the compliance data but not the MRR data:")
-    print("-----> " + str(set(user_facility_df["facility_id"]) - set(facility_df["facility_id"])))
+    print(
+        "-----> "
+        + str(set(user_facility_df["facility_id"]) - set(facility_df["facility_id"]))
+    )
     print()
     uf_df = uf_df[uf_df["facility_id"].isin(f_df["facility_id"])]
 

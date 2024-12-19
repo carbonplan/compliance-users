@@ -27,8 +27,12 @@ def read_user_facility_data(data_path, reporting_periods):
             file_path = data_path + config["file"]
             sheet_name = config["sheet"]
         else:
-            file_path = data_path + default_file_template.format(reporting_period=reporting_period)
-            sheet_name = default_sheet_template.format(reporting_period=reporting_period)
+            file_path = data_path + default_file_template.format(
+                reporting_period=reporting_period
+            )
+            sheet_name = default_sheet_template.format(
+                reporting_period=reporting_period
+            )
 
         # read the Excel file
         df = pd.read_excel(file_path, sheet_name=sheet_name, skiprows=4)
@@ -51,7 +55,9 @@ def read_user_facility_data(data_path, reporting_periods):
         df = df[df["facility_ids"].notna()]
 
         # make a row for each facility id connected to a user and compliance period
-        df["facility_ids"] = df["facility_ids"].apply(lambda x: str(x).replace(" ", "").split(","))
+        df["facility_ids"] = df["facility_ids"].apply(
+            lambda x: str(x).replace(" ", "").split(",")
+        )
         df = df.explode("facility_ids")
         df = df.rename(columns={"facility_ids": "facility_id"})
 
