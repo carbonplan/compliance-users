@@ -40,7 +40,7 @@ This repository is being used to develop a simple tool to query California Cap &
 
 All of these data sources are published by CARB as .xlsx files. Minor edits were needed to make some data machine-readable (e.g deleting values that were struck-through to indicate an edit to a value in the sheet). The slightly edited data sources can be found in this repo.
 
-Note that based on the structure on the structure of public data, offset projects cannot be directly connected to facilities, but both facilities and offset projects can be connected to users.
+Note that based on the structure of public data, offset projects cannot be directly connected to facilities, but both facilities and offset projects can be connected to users.
 
 ### data processing
 
