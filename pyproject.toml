@@ -1,0 +1,97 @@
+
+[project]
+name = "compliance-users"
+description = "Carbonplan compliance-users"
+authors = [{name = "CarbonPlan", email = "hello@carbonplan.org"}]
+readme = "README.md"
+requires-python = ">=3.10"
+
+license = {text = "MIT"}
+
+dependencies = [
+"pandas",
+"numpy"
+]
+dynamic = ["version"]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "ruff",
+    "pre-commit",
+    "mypy"
+]
+
+[tool.setuptools_scm]
+fallback_version = "9999"
+
+[tool.setuptools.packages.find]
+exclude = ["docs", "tests", "tests.*", "docs.*"]
+
+
+[tool.mypy]
+files = "compliance_users/**/*.py"
+show_error_codes = true
+
+
+[tool.ruff]
+# Same as Black.
+extend-include = ["*.ipynb"]
+line-length = 100
+indent-width = 4
+target-version = "py310"
+
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+]
+
+[tool.ruff.lint]
+# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
+# Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
+# McCabe complexity (`C901`) by default.
+select = ["E4", "E7", "E9", "F", "I"]
+per-file-ignores = {}
+
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+# Indent with spaces, rather than tabs.
+indent-style = "space"
+# Respect magic trailing commas.
+skip-magic-trailing-comma = false
+# Automatically detect the appropriate line ending.
+line-ending = "auto"
+
+[tool.ruff.lint.isort]
+known-first-party = ["carbonplan_compliancer_users"]

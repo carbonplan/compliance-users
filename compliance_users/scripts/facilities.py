@@ -1,7 +1,7 @@
+import warnings
 from collections import defaultdict
 
 import pandas as pd
-import warnings
 
 # FOR UPDATES: add new mrr data keys
 mrr_file_year = {
