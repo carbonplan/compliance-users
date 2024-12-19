@@ -46,4 +46,4 @@ Update and test front-end:
 
 - Add new year to the filters.
 
-- Change pointer in 'components/use-store.js' to access the new data.
+- Change pointer in 'components/use-store.js' to access the new data. (You'll have to temporarily point to the update branch version of the data to get a vercel preview of the new data before publication.)
