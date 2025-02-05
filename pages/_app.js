@@ -1,4 +1,5 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
+import PlausibleProvider from 'next-plausible'
 import { ThemeProvider } from 'theme-ui'
 import { MDXProvider, useMDXComponents } from '@mdx-js/react'
 import { useThemedStylesWithMdx } from '@theme-ui/mdx'
@@ -21,24 +22,28 @@ const App = ({ Component, pageProps, router }) => {
 
   if (router.route === '/404') {
     return (
-      <ThemeProvider theme={theme}>
-        <MDXProvider components={components}>
-          <Component {...pageProps} />
-        </MDXProvider>
-      </ThemeProvider>
+      <PlausibleProvider domain='carbonplan.org'>
+        <ThemeProvider theme={theme}>
+          <MDXProvider components={components}>
+            <Component {...pageProps} />
+          </MDXProvider>
+        </ThemeProvider>
+      </PlausibleProvider>
     )
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <MDXProvider components={components}>
-        <Layout>
-          <Header />
-          <Component {...pageProps} />
-          <Info />
-        </Layout>
-      </MDXProvider>
-    </ThemeProvider>
+    <PlausibleProvider domain='carbonplan.org'>
+      <ThemeProvider theme={theme}>
+        <MDXProvider components={components}>
+          <Layout>
+            <Header />
+            <Component {...pageProps} />
+            <Info />
+          </Layout>
+        </MDXProvider>
+      </ThemeProvider>
+    </PlausibleProvider>
   )
 }
 
