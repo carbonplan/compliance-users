@@ -1,4 +1,5 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
+import Script from 'next/script'
 import { ThemeProvider } from 'theme-ui'
 import { MDXProvider, useMDXComponents } from '@mdx-js/react'
 import { useThemedStylesWithMdx } from '@theme-ui/mdx'
@@ -9,6 +10,16 @@ import useStore from '../components/use-store'
 import Header from '../components/header'
 import Layout from '../components/layout'
 import Info from '../components/info'
+
+const Analytics = () =>
+  process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? (
+    <Script
+      strategy='lazyOnload'
+      data-domain='carbonplan.org'
+      data-api='https://carbonplan.org/proxy/api/event'
+      src='https://carbonplan.org/js/script.file-downloads.outbound-links.js'
+    />
+  ) : null
 
 const App = ({ Component, pageProps, router }) => {
   const data = useStore((state) => state.data)
@@ -22,6 +33,7 @@ const App = ({ Component, pageProps, router }) => {
   if (router.route === '/404') {
     return (
       <ThemeProvider theme={theme}>
+        <Analytics />
         <MDXProvider components={components}>
           <Component {...pageProps} />
         </MDXProvider>
@@ -31,6 +43,7 @@ const App = ({ Component, pageProps, router }) => {
 
   return (
     <ThemeProvider theme={theme}>
+      <Analytics />
       <MDXProvider components={components}>
         <Layout>
           <Header />
