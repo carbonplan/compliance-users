@@ -15,6 +15,10 @@ def read_user_facility_data(data_path, reporting_periods):
             "file": "nc-CP4compliancereport.xlsx",
             "sheet": "CP4 Compliance Summary",
         },
+        "2024": {
+            "file": "nc-2024compliancereport.xlsx",
+            "sheet": "2024 Compliance Summary",
+        },
     }
 
     default_file_template = "{reporting_period}compliancereport.xlsx"

@@ -16,6 +16,7 @@ mrr_file_year = {
     "2021": "2022-11-04",
     "2022": "2023-11-06",
     "2023": "2024-11-15",
+    "2024": "2025-11-04"
 }
 reporting_periods = {
     "2013": "2013-2014",
@@ -29,13 +30,14 @@ reporting_periods = {
     "2021": "2021-2023",
     "2022": "2021-2023",
     "2023": "2021-2023",
+    "2024": "2024"
 }
 
 
 def read_facility_data(data_path, mrr_data_years):
     
     # FOR UPDATES: check number of rows to skip in GHG data tab
-    skiprows_by_year = {"2022": 9, "2023": 7}
+    skiprows_by_year = {"2022": 9, "2023": 7, "2024": 7}
     default_skiprows = 8
 
     # define column rename schema
