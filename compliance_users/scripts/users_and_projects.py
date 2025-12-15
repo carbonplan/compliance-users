@@ -15,7 +15,7 @@ def read_user_project_data(data_path, reporting_periods):
         "2024": {
             "file": "nc-2024compliancereport.xlsx",
             "sheet": "2024 Offset Detail",
-        }
+        },
     }
 
     default_file_template = "{reporting_period}compliancereport.xlsx"

@@ -24,7 +24,7 @@ mrr_data_years = [
     "2021",
     "2022",
     "2023",
-    "2024"
+    "2024",
 ]
 
 # FOR UPDATES: change to latest issuance table file name
