@@ -1,5 +1,6 @@
 import json
 
+import config
 import facilities
 import pandas as pd
 import projects
@@ -8,28 +9,6 @@ import users_and_projects
 
 # Todo: address pandas warning w/out silencing
 pd.options.mode.chained_assignment = None
-
-# Define years over which compliance data will be considered and where to find it
-# FOR UPDATES: add reporting and mrr data years
-reporting_periods = ["2013-2014", "2015-2017", "2018-2020", "2021-2023"]
-mrr_data_years = [
-    "2013",
-    "2014",
-    "2015",
-    "2016",
-    "2017",
-    "2018",
-    "2019",
-    "2020",
-    "2021",
-    "2022",
-    "2023",
-]
-
-# FOR UPDATES: change to latest issuance table file name
-issuance_table_path = "../data/nc-arboc_issuance_2024-12-10.xlsx"
-compliance_report_path = "../data/compliance-reports/"
-mrr_data_path = "../data/mrr-data/"
 
 
 def prune_data(user_project_df, project_df, user_facility_df, facility_df):
@@ -86,13 +65,13 @@ def write_json(collection, output):
 
 def main():
     # read data
-    project_df = projects.read_project_data(issuance_table_path)
-    facility_df = facilities.read_facility_data(mrr_data_path, mrr_data_years)
+    project_df = projects.read_project_data(config.issuance_table_path)
+    facility_df = facilities.read_facility_data(config.mrr_data_path, config.mrr_data_years)
     user_project_df = users_and_projects.read_user_project_data(
-        compliance_report_path, reporting_periods
+        config.compliance_report_path, config.reporting_periods
     )
     user_facility_df = users_and_facilities.read_user_facility_data(
-        compliance_report_path, reporting_periods
+        config.compliance_report_path, config.reporting_periods
     )
 
     # prune data to min-set for representing offset use
@@ -140,7 +119,7 @@ def main():
     }
 
     # FOR UPDATES: change json destination
-    write_json(collection, "../data/outputs/user_data_v4.0.json")
+    write_json(collection, config.output_path)
 
 
 if __name__ == "__main__":
