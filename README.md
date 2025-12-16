@@ -14,7 +14,7 @@ Working repo to make a simple tool for querying CA compliance data.
 ![Checks status](https://github.com/carbonplan/compliance-users/actions/workflows/main.yml/badge.svg)
 ![GitHub deployments](https://img.shields.io/github/deployments/carbonplan/compliance-users/production?label=vercel&style=flat)
 [![License](https://img.shields.io/github/license/carbonplan/compliance-users?style=flat)](https://github.com/carbonplan/compliance-users/blob/main/LICENSE)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5819475.svg)](https://doi.org/10.5281/zenodo.5819475)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17956162.svg)](https://doi.org/10.5281/zenodo.17956162)
 
 This repository is being used to develop a simple tool to query California Cap & Trade compliance data. Specifically, the tool allows a user to ask which regulated entities in California – whom we call users throughout the repo – have turned in credits from a particular offset project (project-->users) or which offset projects a particular user has used credits from (user-->projects).
 
@@ -90,7 +90,7 @@ Update to reflect compliance data released in December 2023.
 
 Update to reflect compliance data released in December 2024.
 
-### 5.0.0 (Dec 15, 2025)
+### 5.0.0 (Dec 16, 2025)
 
 Update to reflect compliance data released in December 2025.
 

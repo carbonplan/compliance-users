@@ -29,7 +29,7 @@ const description = (
     <Link href='https://carbonplan.org/blog/compliance-users-release'>
       blog post
     </Link>{' '}
-    or checkout the{' '}
+    or check out the{' '}
     <Link href='https://github.com/carbonplan/compliance-users'>
       GitHub repository
     </Link>
