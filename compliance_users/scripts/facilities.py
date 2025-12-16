@@ -2,42 +2,10 @@ import warnings
 from collections import defaultdict
 
 import pandas as pd
-
-# FOR UPDATES: add new mrr data keys
-mrr_file_year = {
-    "2013": "2019-11-04",
-    "2014": "2019-11-04",
-    "2015": "2019-11-04",
-    "2016": "2020-11-04",
-    "2017": "2020-11-04",
-    "2018": "2020-11-04",
-    "2019": "2020-11-04",
-    "2020": "2021-11-04",
-    "2021": "2022-11-04",
-    "2022": "2023-11-06",
-    "2023": "2024-11-15",
-    "2024": "2025-11-04",
-}
-reporting_periods = {
-    "2013": "2013-2014",
-    "2014": "2013-2014",
-    "2015": "2015-2017",
-    "2016": "2015-2017",
-    "2017": "2015-2017",
-    "2018": "2018-2020",
-    "2019": "2018-2020",
-    "2020": "2018-2020",
-    "2021": "2021-2023",
-    "2022": "2021-2023",
-    "2023": "2021-2023",
-    "2024": "2024",
-}
+import config
 
 
 def read_facility_data(data_path, mrr_data_years):
-    # FOR UPDATES: check number of rows to skip in GHG data tab
-    skiprows_by_year = {"2022": 9, "2023": 7, "2024": 7}
-    default_skiprows = 8
 
     # define column rename schema
     rename_d = {
@@ -55,10 +23,11 @@ def read_facility_data(data_path, mrr_data_years):
 
     for mrr_data_year in mrr_data_years:
         # determine skiprows
-        skiprows = skiprows_by_year.get(mrr_data_year, default_skiprows)
+        default_skiprows = 8
+        skiprows = config.skiprows_by_year.get(mrr_data_year, default_skiprows)
 
         # construct the mrr file path
-        file_path = f"{data_path}{mrr_data_year}-ghg-emissions-{mrr_file_year[mrr_data_year]}.xlsx"
+        file_path = f"{data_path}{mrr_data_year}-ghg-emissions-{config.mrr_file_year[mrr_data_year]}.xlsx"
 
         # read the Excel file
         df = pd.read_excel(
@@ -71,7 +40,7 @@ def read_facility_data(data_path, mrr_data_years):
         df = df[rename_d.keys()].rename(columns=rename_d)
 
         # add reporting period column
-        df["reporting_period"] = reporting_periods[mrr_data_year]
+        df["reporting_period"] = config.reporting_period_map[mrr_data_year]
 
         # append to the facility dataframe
         facility_df = pd.concat([facility_df, df], ignore_index=True)

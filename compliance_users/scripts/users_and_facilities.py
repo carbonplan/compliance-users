@@ -1,24 +1,10 @@
 from collections import defaultdict
 
 import pandas as pd
+import config
 
 
 def read_user_facility_data(data_path, reporting_periods):
-    # FOR UPDATES: check naming of compliance report file and tab
-    file_config_by_year = {
-        "2022": {
-            "file": "nc-2022compliancereport.xlsx",
-            "sheet": "2022 Compliance Summary",
-        },
-        "2021-2023": {
-            "file": "nc-CP4compliancereport.xlsx",
-            "sheet": "CP4 Compliance Summary",
-        },
-        "2024": {
-            "file": "nc-2024compliancereport.xlsx",
-            "sheet": "2024 Compliance Summary",
-        },
-    }
 
     default_file_template = "{reporting_period}compliancereport.xlsx"
     default_sheet_template = "{reporting_period} Compliance Summary"
@@ -26,10 +12,10 @@ def read_user_facility_data(data_path, reporting_periods):
     entity_facility_df = pd.DataFrame()
 
     for reporting_period in reporting_periods:
-        config = file_config_by_year.get(reporting_period, None)
-        if config:
-            file_path = data_path + config["file"]
-            sheet_name = config["sheet"]
+        special_config = config.file_config_by_year.get(reporting_period, None)
+        if special_config:
+            file_path = data_path + special_config["file"]
+            sheet_name = special_config["compliance_sheet"]
         else:
             file_path = data_path + default_file_template.format(reporting_period=reporting_period)
             sheet_name = default_sheet_template.format(reporting_period=reporting_period)
