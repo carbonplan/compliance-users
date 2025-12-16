@@ -8,4 +8,4 @@ Additional information about offset projects can be found in our public [offsets
 
 You can cite this work as:
 
-F Chay, J Freeman, D Cullenward (2025) “Compliance users” CarbonPlan [doi:10.5281/zenodo.7668230](https://doi.org/10.5281/zenodo.7668230)
+F Chay, J Freeman, D Cullenward (2025) “Compliance users” CarbonPlan [doi:10.5281/zenodo.7668230](https://doi.org/10.5281/zenodo.5819475)
