@@ -90,7 +90,7 @@ Update to reflect compliance data released in December 2023.
 
 Update to reflect compliance data released in December 2024.
 
-### 4.0.0 (Dec 15, 2025)
+### 5.0.0 (Dec 15, 2025)
 
 Update to reflect compliance data released in December 2025.
 
