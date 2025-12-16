@@ -1,20 +1,13 @@
-
 # Update input and output data paths
 issuance_table_path = "../../data/issuance-tables/nc-arboc_issuance_2025-12-15.xlsx"
 compliance_report_path = "../../data/compliance-reports/"
 mrr_data_path = "../../data/mrr-data/"
 output_path = "../../data/outputs/user_data_v5.0.json"
 
-# Update the years over which compliance data will be considered (Note: annual 
+# Update the years over which compliance data will be considered (Note: annual
 # reporting periods will be replaced when data for the full compliance period
 # is released.)
-reporting_periods = [
-    "2013-2014", 
-    "2015-2017", 
-    "2018-2020", 
-    "2021-2023", 
-    "2024"
-]
+reporting_periods = ["2013-2014", "2015-2017", "2018-2020", "2021-2023", "2024"]
 mrr_data_years = [
     "2013",
     "2014",
@@ -67,7 +60,7 @@ skiprows_by_year = {"2022": 9, "2023": 7, "2024": 7}
 
 
 # Update the dictionay used navigate the new compliance report with
-# the file and tab names. 
+# the file and tab names.
 file_config_by_year = {
     "2022": {
         "file": "nc-2022compliancereport.xlsx",

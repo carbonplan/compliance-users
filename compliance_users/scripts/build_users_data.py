@@ -1,11 +1,11 @@
 import json
 
+import config
 import facilities
 import pandas as pd
 import projects
 import users_and_facilities
 import users_and_projects
-import config
 
 # Todo: address pandas warning w/out silencing
 pd.options.mode.chained_assignment = None

@@ -1,9 +1,8 @@
-import pandas as pd
 import config
+import pandas as pd
 
 
 def read_user_project_data(data_path, reporting_periods):
-
     default_file_template = "{reporting_period}compliancereport.xlsx"
     default_sheet_template = "{reporting_period} Offset Detail"
 

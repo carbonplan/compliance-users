@@ -1,12 +1,11 @@
 import warnings
 from collections import defaultdict
 
-import pandas as pd
 import config
+import pandas as pd
 
 
 def read_facility_data(data_path, mrr_data_years):
-
     # define column rename schema
     rename_d = {
         "ARB ID": "facility_id",
@@ -27,7 +26,9 @@ def read_facility_data(data_path, mrr_data_years):
         skiprows = config.skiprows_by_year.get(mrr_data_year, default_skiprows)
 
         # construct the mrr file path
-        file_path = f"{data_path}{mrr_data_year}-ghg-emissions-{config.mrr_file_year[mrr_data_year]}.xlsx"
+        file_path = (
+            f"{data_path}{mrr_data_year}-ghg-emissions-{config.mrr_file_year[mrr_data_year]}.xlsx"
+        )
 
         # read the Excel file
         df = pd.read_excel(
